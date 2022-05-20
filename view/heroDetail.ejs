@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../view/head') %>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="ms-5">
+          <a class="navbar-brand" href="/"><%= hero.title %></a>
+        </div>
+      </nav>
+    </header>
+    <div class="container py-4" style="width: 500px">
+      <div class="container p-4">
+        <form action="/hero/update" method="post">
+          <p class="text-muted fs-6" style="margin: 0">Edit Nama Hero</p>
+          <input class="form-control mb-4" type="text" hidden name="id" value="<%= hero.data[0].id %> " />
+          <input class="form-control mb-4" type="text" name="name" placeholder="Edit Hero" value="<%= hero.data[0].name %> " />
+          <p class="text-muted fs-6" style="margin: 0">Edit Role Hero</p>
+          <input class="form-control mb-4" type="text" name="role" placeholder="Edit Role" value="<%= hero.data[0].role %> " />
+          <p class="text-muted fs-6" style="margin: 0">Edit Skill</p>
+          <input class="form-control mb-4" type="text" name="skill" placeholder="Edit Skill" value="<%= hero.data[0].skill %> " />
+          <input class="form-control btn btn-primary" type="submit" value="update" onclick="return confirm('ubah data?')" />
+        </form>
+      </div>
+      <div class="container text-center mt-3">
+        <a href="/hero" class="btn btn-danger" role="button" onclick="alert('Data tidak tersimpan\nlanjutkan?')">Kembali ke HERO</a>
+      </div>
+      <footer class="bg-light my-3">
+        <p class="text-center text-muted py-3">© Copyright 2022 Moh Rizka Haris Pradana</p>
+      </footer>
+    </div>
+  </body>
+</html>

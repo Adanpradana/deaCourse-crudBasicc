@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../view/head') %>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="ms-5">
+          <a class="navbar-brand" href="/"><%= heroes.title %></a>
+        </div>
+      </nav>
+    </header>
+    <div class="container container-table pt-3">
+      <table class="table table-light text-center">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">role</th>
+            <th scope="col">skill</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <% for (let i = 0; i < heroes.data.length; i++) {%>
+        <tr>
+          <td><%= i+1%></td>
+          <td><%= heroes.data[i].name%></td>
+          <td><%= heroes.data[i].role%></td>
+          <td><%= heroes.data[i].skill%></td>
+          <td>
+            <form action="/hero/remove" method="post">
+              <a href="/hero/<%=heroes.data[i].id  %>" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+              <input type="text" hidden name="id" value="<%= heroes.data[i].id %> " />
+              <button type="submit" action="/hero/remove" class="btn btn-danger" onclick="return confirm('Delete entry?\nData Tidak dapat kembali')"><i class="bi bi-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      </table>
+      <div class="container mb-3">
+        <div class="container p-4">
+          <h1 class="text-center">ADD HERO</h1>
+          <form action="/hero/add" method="post">
+            <input class="form-control mb-4" type="text" name="name" placeholder="Isi Nama Hero" />
+            <input class="form-control mb-4" type="text" name="role" placeholder="Isi Role Hero" />
+            <input class="form-control mb-4" type="text" name="skill" placeholder="Isi Skill Hero" />
+            <input class="btn btn-primary" type="submit" value="Hero Berhasil ditambahkan" onclick="alert('Berhasil');" />
+          </form>
+        </div>
+      </div>
+      <footer class="bg-light"><p class="text-center text-muted py-3">© Copyright 2022 Moh Rizka Haris Pradana</p></footer>
+    </div>
+  </body>
+
+  <script>
+    function confirm_delete() {
+      return confirm("are you sure?");
+    }
+  </script>
+</html>
