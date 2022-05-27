@@ -4,7 +4,6 @@ const server = express();
 const bodyParser = require("body-parser");
 const heroController = require("./controller/hero.controller");
 
-// server.use(express.static("CSS"));
 server.use(bodyParser.urlencoded({ extended: false }));
 server.set("view engine", "ejs");
 server.set("views", "view");
