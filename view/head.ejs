@@ -1,17 +1,22 @@
-// import sql
-const mysql = require("mysql");
+<meta charset="UTF-8" />
+<title>Dota-2 addict</title>
 
-// database credential
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "dota_2",
-});
+<!-- Bootsrap icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css" />
 
-// connect/intergrate to mysql
-connection.connect((error) => {
-  if (error) throw error;
-  console.log("DATABASE CONNECTED");
-});
-module.exports = connection;
+<!-- CSS (load bootstrap from a CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+<style>
+  .container.px-4 {
+    margin-top: 20px;
+  }
+
+  .container-table {
+    width: 500px;
+    padding: 20px auto;
+  }
+  .container.p-4 {
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+</style>
