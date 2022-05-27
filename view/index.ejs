@@ -1,287 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style.css" />
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lobster&family=Oswald:wght@200;400&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
-    <!-- end google fonts -->
-
-    <!-- bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-
-    <title>Landing Page</title>
+    <%- include('../view/head') %>
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="background-color: #f3fcf7">
-      <div class="container" style="width: 1177px">
-        <a class="navbar-brand" href="#"><img src="Assets/Logo.png" alt="" width="120" height="42" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item item-1">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item item-2">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
-            <li class="nav-item item-3">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item item-4">
-              <a class="nav-link" href="#">Our Company</a>
-            </li>
-            <li class="nav-item item-5">
-              <a class="nav-link" href="#">Pages</a>
-            </li>
-          </ul>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="ms-5">
+          <a class="navbar-brand" href="/"><%= heroes.title %></a>
+        </div>
+      </nav>
+    </header>
+    <div class="container container-table pt-3">
+      <table class="table table-light text-center">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">role</th>
+            <th scope="col">skill</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <% for (let i = 0; i < heroes.data.length; i++) {%>
+        <tr>
+          <td><%= i+1%></td>
+          <td><%= heroes.data[i].name%></td>
+          <td><%= heroes.data[i].role%></td>
+          <td><%= heroes.data[i].skill%></td>
+          <td>
+            <form action="/hero/remove" method="post">
+              <a href="/hero/<%=heroes.data[i].id  %>" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+              <input type="text" hidden name="id" value="<%= heroes.data[i].id %> " />
+              <button type="submit" action="/hero/remove" class="btn btn-danger" onclick="return confirm('Delete entry?\nData Tidak dapat kembali')"><i class="bi bi-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      </table>
+      <div class="container mb-3">
+        <div class="container p-4">
+          <h1 class="text-center">ADD HERO</h1>
+          <form action="/hero/add" method="post">
+            <input class="form-control mb-4" type="text" name="name" placeholder="Isi Nama Hero" />
+            <input class="form-control mb-4" type="text" name="role" placeholder="Isi Role Hero" />
+            <input class="form-control mb-4" type="text" name="skill" placeholder="Isi Skill Hero" />
+            <input class="btn btn-primary" type="submit" value="Tambah Hero" onclick="alert('Berhasil tambah Hero');" />
+          </form>
         </div>
       </div>
-    </nav>
-    <!-- end Navbar -->
-    <!-- hero -->
-    <!-- hero tessttt -->
-
-    <section id="hero" class="">
-      <div class="container" style="width: 1177px">
-        <div class="row gx-5">
-          <div class="col-md-6">
-            <div class="section1 mb-5 mb-md-0 text-center text-md-start py-5">
-              <!-- content 1 -->
-              <div>
-                <h1 class="header">We're Serious For Food.</h1>
-                <p class="text-wrap">
-                  We strive to provide a space where guests can connect with <br />
-                  themselves and explore their full potential, offering a safe place.
-                </p>
-                <button class="btn button-md-primary get-started">Get Started<img src="Assets/Icon awesome-long-arrow-alt-right.png" alt="" class="arrow" /></button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="position-relative">
-              <img src="assets/Hero.png" alt="" class="img-fluid" />
-              <img src="Assets/Polcadot.png" alt="" class="img-fluid position-absolute bottom-0 end-0" />
-              <div class="rounded-pill bg-light d-flex align-items-center justify-content-center start-0 top-50 translate-middle-y" style="width: 230px; height: 53px">
-                <span class="d-flex p">5.0 Ratings </span>
-                <img src="Assets/Group.svg" alt="" />
-                <img src="Assets/Group.svg" alt="" />
-                <img src="Assets/Group.svg" alt="" />
-                <img src="Assets/Group.svg" alt="" />
-                <img src="Assets/Group.svg" alt="" />
-              </div>
-              <div class="round2 rounded-pill position-absolute bg-light d-flex align-items-center" style="width: 230px; height: 53px">
-                <img src="Assets/Place Your Image.png" alt="" />
-                <span class="d-flex p2">Good Quality Product</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end hero -->
-    <!-- Features -->
-    <section class="masthead py-5">
-      <div class="container d-flex align-items-center get-started py-5" style="height: 185px; width: 1177px">
-        <div class="shipping d-flex" style="width: 209px; height: 70px">
-          <span class="squarebox d-flex" style="width: 70px; height: 70px; background-color: #f3fcf7"><img class="m-auto" src="Assets/Icon awesome-truck.svg" alt="" /></span>
-          <div class="d-block features2 m-auto">
-            <p class="free">Free Shipping</p>
-            <p class="order">Orders over $140</p>
-          </div>
-        </div>
-        <div class="payment d-flex" style="width: 240px; height: 70px">
-          <span class="squarebox d-flex" style="width: 70px; height: 70px; background-color: #f3fcf7"><img class="m-auto" src="Assets/Icon awesome-wallet.svg" alt="" /></span>
-          <div class="d-block features2 m-auto">
-            <p class="free">Quick Payment</p>
-            <p class="order">100% secure payment</p>
-          </div>
-        </div>
-        <div class="promo d-flex" style="width: 214px; height: 70px">
-          <span class="squarebox d-flex" style="width: 70px; height: 70px; background-color: #f3fcf7"><img class="m-auto" src="Assets/Icon awesome-wallet.svg" alt="" /></span>
-          <div class="d-block features2 m-auto">
-            <p class="free">Special Promo</p>
-            <p class="order">Get special promo</p>
-          </div>
-        </div>
-        <div class="support d-flex" style="width: 205px; height: 70px">
-          <span class="squarebox d-flex" style="width: 70px; height: 70px; background-color: #f3fcf7"><img class="m-auto" src="Assets/Icon awesome-wallet.svg" alt="" /></span>
-          <div class="d-block features2 m-auto">
-            <p class="free">24/7 Support</p>
-            <p class="order">Ready support</p>
-          </div>
-        </div>
-      </div>
-      <!-- our benefit -->
-      <section class="container my-5 benefit" style="width: 1170px">
-        <div class="container row align-items-center d-flex p-0 m-0">
-          <div class="col-md-6 px-0">
-            <div class="text-center" style="width: 541px; height: 608px; background-color: #f3fafb">
-              <img src="Assets/fruits.png" alt="" class="img-fluid" />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="inside">
-              <p class="our-benefit inside-2">Our Benefit</p>
-              <div class="position-relative" style="height: 189px" ;>
-                <h1>The More Healthy Food The Better</h1>
-                <img src="Assets/Polcadot2.png" alt="" class="position-absolute bottom-0 start-0" />
-              </div>
-              <div class="checklist" style="margin-top: 24px">
-                <div class="inside-2">
-                  <img src="Assets/Icon awesome-check.svg" alt="" />
-                  <p class="d-inline-block">Be Alive With Veggie Food.</p>
-                </div>
-                <div class="inside-2">
-                  <img src="Assets/Icon awesome-check.svg" alt="" />
-                  <p class="d-inline-block">Be Alive With Veggie Food.</p>
-                </div>
-                <div class="inside-2">
-                  <img src="Assets/Icon awesome-check.svg" alt="" />
-                  <p class="d-inline-block">The Best Silk Dish In Town</p>
-                </div>
-                <div class="inside-2">
-                  <img src="Assets/Icon awesome-check.svg" alt="" />
-                  <p class="d-inline-block">Truffles, Egg & Pumpkin Spice</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- end benefit -->
-
-      <!-- card -->
-      <section class="container py-5 card" style="width: 1177px">
-        <div>
-          <p>Our Product</p>
-          <h1>Most Popular Product</h1>
-        </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-          <div class="col">
-            <div class="card align-items-center text-center">
-              <img src="Assets/banana.png" style="width: 190px; height: 190px" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Summer Veganie</h5>
-                <p class="card-text" style="color: #06c167; padding-top: 25px; padding-bottom: 29px">
-                  <del style="color: #767675"><span class="text-muted">$25</span></del> $29
-                </p>
-                <div style="padding-bottom: 29px">
-                  <button class="btn button-md-primary card-button" style="color: #06c167">Buy Now<img src="Assets/Icon awesome-long-arrow-alt-right-green.png" alt="" class="arrow img-fluid" /></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card align-items-center text-center">
-              <img src="Assets/papaya.png" style="width: 190px; height: 190px" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Greanie Seafood</h5>
-                <p class="card-text" style="color: #06c167; padding-top: 25px; padding-bottom: 29px">
-                  <del style="color: #767675"><span class="text-muted">$25</span></del> $29
-                </p>
-                <div style="padding-bottom: 29px">
-                  <button class="btn button-md-primary card-button" style="color: #06c167">Buy Now<img src="Assets/Icon awesome-long-arrow-alt-right-green.png" alt="" class="arrow img-fluid" /></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card align-items-center text-center">
-              <img src="Assets/avocado.png" style="width: 190px; height: 190px" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Fresh Vegetable</h5>
-                <p class="card-text" style="color: #06c167; padding-top: 25px; padding-bottom: 29px">
-                  <del style="color: #767675"><span class="text-muted">$25</span></del> $29
-                </p>
-                <div style="padding-bottom: 29px">
-                  <button class="btn button-md-primary card-button" style="color: #06c167">Buy Now<img src="Assets/Icon awesome-long-arrow-alt-right-green.png" alt="" class="arrow img-fluid" /></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card align-items-center text-center">
-              <img src="Assets/Meatyus.png" style="width: 190px; height: 190px" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Fresh Meatyus</h5>
-                <p class="card-text" style="color: #06c167; padding-top: 25px; padding-bottom: 29px">
-                  <del style="color: #767675"><span class="text-muted">$25</span></del> $29
-                </p>
-                <div style="padding-bottom: 29px">
-                  <button class="btn button-md-primary card-button" style="color: #06c167">Buy Now<img src="Assets/Icon awesome-long-arrow-alt-right-green.png" alt="" class="arrow img-fluid" /></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- end card -->
-    </section>
-    <!-- End Features -->
-    <!-- footer -->
-    <footer class="container py-5" style="width: 1177px">
-      <div class="row">
-        <div class="col-md-4">
-          <div style="margin-bottom: 41px">
-            <img src="Assets/Logo.png" alt="" />
-          </div>
-          <div class="text-footer" style="margin-bottom: 51px">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-          </div>
-          <div class="social-icons">
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-instagram" style="margin-left: 25px"></i></a>
-            <a href="#"><i class="bi bi-twitter" style="margin-left: 25px"></i></a>
-          </div>
-        </div>
-        <div class="col">
-          <h3>About Us</h3>
-          <ul style="padding-left: 0; margin-top: 41px">
-            <li class="nav-item" style="list-style: none; margin-bottom: 16px"><a class="nav-link p-0" style="color: black" href="#">Services</a></li>
-            <li class="nav-item" style="list-style: none; margin-bottom: 16px"><a class="nav-link p-0" style="color: black" href="#">Contact</a></li>
-            <li class="nav-item" style="list-style: none; margin-bottom: 16px"><a class="nav-link p-0" style="color: black" href="#">Company</a></li>
-            <li class="nav-item" style="list-style: none"><a class="nav-link p-0" style="color: black" href="#">About Us</a></li>
-          </ul>
-        </div>
-        <div class="col">
-          <h3>Company</h3>
-          <ul style="padding-left: 0; margin-top: 41px">
-            <li class="nav-item" style="list-style: none; margin-bottom: 16px"><a class="nav-link p-0" style="color: black" href="#">Services</a></li>
-            <li class="nav-item" style="list-style: none; margin-bottom: 16px"><a class="nav-link p-0" style="color: black" href="#">Contact</a></li>
-            <li class="nav-item" style="list-style: none; margin-bottom: 16px"><a class="nav-link p-0" style="color: black" href="#">Company</a></li>
-            <li class="nav-item" style="list-style: none"><a class="nav-link p-0" style="color: black" href="#">About Us</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h3>Get In Touch</h3>
-          <p style="margin-top: 41px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-          <div class="d-flex" style="margin-top: 37px">
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" style="margin-right: 15px" />
-            <button class="btn btn btn-success">Subscribe</button>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <footer class="bg-light"><p class="text-center text-muted py-3">© Copyright 2022 Moh Rizka Haris Pradana</p></footer>
-        </div>
-      </div>
-    </footer>
-    <!-- end footer -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <footer class="bg-light"><p class="text-center text-muted py-3">© Copyright 2022 Moh Rizka Haris Pradana</p></footer>
+    </div>
   </body>
 </html>
